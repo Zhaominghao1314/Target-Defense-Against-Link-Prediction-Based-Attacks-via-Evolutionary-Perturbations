@@ -12,7 +12,6 @@ import random
 import math
 import time
 import copy
-#from functools import partial
 from itertools import combinations
 import bisect
 import csv
@@ -65,7 +64,7 @@ def init_generation(pop_size, num_change):
         pop.append(perturb(del_edges, add_edges))
     return pop
  
-def perturb_recalc_delete(train_G, link, recalc):#删除连边需要单独算，因为存在连边，考虑到节点邻居
+def perturb_recalc_delete(train_G, link, recalc):
     testList = set()
     neighborhood_x = sorted(train_G.neighbors(link[0]))
     neighborhood_y = sorted(train_G.neighbors(link[1]))
@@ -314,11 +313,9 @@ if __name__ == "__main__":
         with open(ori_path,'r') as ori_file:
             ori_G = nx.read_edgelist(ori_file, delimiter=',', nodetype = int)
         train_path = './dataset/'+fileName+'/'+fileName+'_train_'+str(i+1)+'.csv'
-        #train_path = '/home/zmh/revision/dataset/'+fileName+'_train.csv'
         with open(train_path, 'r') as train_file:
             train_G = nx.read_edgelist(train_file, delimiter=',', nodetype = int)
         test_path = './dataset/'+fileName+'/'+fileName+'_test_'+str(i+1)+'.csv'
-        #test_path = '/home/zmh/revision/dataset/'+fileName+'_test.csv'
         with open(test_path, 'r') as test_file:
             test_G = nx.read_edgelist(test_file, delimiter=',', nodetype = int)
         global n, complete_edges, train_edges, test_edges, nonexist_edges, ratio, init_recalc, decedent_order, init_proximity_dic, train_edges_set, nonexist_edges_set, test_edges_set 
@@ -376,11 +373,8 @@ if __name__ == "__main__":
             for m in range(len(bestpop_eda)):
                 index += 1
                 with open('./elite/'+fileName+'/'+fileName+'_'+str(i+1)+'/'+fileName+'_'+str(index)+'.csv','wb') as attacked_file: 
-                #with open('/home/zmh/revision/elite/'+fileName+'/'+fileName+'_'+str(index)+'.csv','wb') as attacked_file:
                     writer = csv.writer(attacked_file)
                     writer.writerows(bestpop_eda[m].edges)                      
-    print fileName
-    print 'ratio', ratio
     print 'eda_prd, len', eda_prd.mean(), eda_prd.std(), len(eda_prd)
     print 'eda_auc, len', eda_auc.mean(), eda_auc.std(), len(eda_auc)  
     print 'all time:', time.time()-start
