@@ -1,4 +1,4 @@
-# Target defense against link-prediction-based attacks via evolutionary perturbations. TKDE2019
+# [TKDE2019] Target defense against link-prediction-based attacks via evolutionary perturbations. 
 ## Introduction
 attached are the source codes (RLR, RLS, HP, EDA) and result tables (topk precision). 
 ## Reference
